@@ -1,5 +1,6 @@
 package com.viettel.statisticservice.service.impl;
 
+import com.viettel.statisticservice.comon.FileWriter;
 import com.viettel.statisticservice.repository.StatisticRepository;
 import com.viettel.statisticservice.service.StatisticService;
 import com.viettel.statisticservice.service.dto.StatisticDTO;
@@ -36,6 +37,7 @@ public class StatisticServiceImpl implements StatisticService {
 //            throw e;
 ////            e.printStackTrace();
 //        }
+        FileWriter.writeDataToFile(dto);
         return statisticRepository.save(statisticMapper.toEntity(dto)).getId();
     }
 }
