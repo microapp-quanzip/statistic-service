@@ -7,12 +7,23 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.List;
 
 public class FileWriter {
     public static void writeDataToFile(StatisticDTO statisticDTO) throws IOException {
         File folder = new File("./output");
         if (!folder.exists()) {
             folder.mkdir();
+        }
+
+        if(folder.list().length > 10){
+            System.out.println("There are more than 10 files, to much to store, deleting...");
+
+            String []fileNames = folder.list();
+            for(String fileName : fileNames){
+                File fileToDelete = new File(folder, fileName);
+                System.out.println("deleting fileName: "+ fileName + ": " +fileToDelete.delete());
+            }
         }
 
         String statisticMessage = statisticDTO.toString();
